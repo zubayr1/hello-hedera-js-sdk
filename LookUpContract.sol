@@ -6,7 +6,7 @@ contract LookUpContract
 {
     mapping (string => uint) public myDirectory;
 
-    constructor (string memory _name, uint _number) public
+    constructor (string memory _name, uint _number) 
     {
         myDirectory[_name] = _number;
     }
@@ -22,4 +22,4 @@ contract LookUpContract
     }
 }
 
-//solcjs --bin Lookup.sol
+//solcjs --bin LookUpContract.sol

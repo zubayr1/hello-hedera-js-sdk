@@ -26,21 +26,19 @@ const client = Client.forTestnet().setOperator(operatorId, operatorKey);
 async function main() {
 
   // Import the compiled contract bytecode
-	const contractBytecode = fs.readFileSync("Lookup_sol_LookUpContract.bin");
+const contractBytecode = fs.readFileSync("LookUpContract_sol_LookUpContract.bin");
 
-	// Create a file on Hedera and store the bytecode
-	const fileCreateTx = new FileCreateTransaction()
-		.setContents(contractBytecode)
-		.setKeys([operatorKey])
-        .setMaxTransactionFee(new Hbar(0.75))
-		.freezeWith(client);
-
-	const fileCreateSign = await fileCreateTx.sign(operatorKey);
-	const fileCreateSubmit = await fileCreateSign.execute(client);
-	const fileCreateRx = await fileCreateSubmit.getReceipt(client);
-	const bytecodeFileId = fileCreateRx.fileId;
-
-	console.log(`- The bytecode file ID is: ${bytecodeFileId} \n`);
+// Create a file on Hedera and store the bytecode
+const fileCreateTx = new FileCreateTransaction()
+	.setContents(contractBytecode)
+	.setKeys([operatorKey])
+	.setMaxTransactionFee(new Hbar(100))
+	.freezeWith(client);
+const fileCreateSign = await fileCreateTx.sign(operatorKey);
+const fileCreateSubmit = await fileCreateSign.execute(client);
+const fileCreateRx = await fileCreateSubmit.getReceipt(client);
+const bytecodeFileId = fileCreateRx.fileId;
+console.log(`- The bytecode file ID is: ${bytecodeFileId} \n`);
 
 
 
@@ -65,7 +63,7 @@ async function main() {
 	const contractQueryTx = new ContractCallQuery()
 		.setContractId(contractId)
 		.setGas(100000)
-		.setFunction("getMobileNumber", new ContractFunctionParameters().addString("Alice"));
+		.setFunction("getNumber", new ContractFunctionParameters().addString("Alice"));
 	const contractQuerySubmit = await contractQueryTx.execute(client);
 	const contractQueryResult = contractQuerySubmit.getUint256(0);
 	console.log(`- Here's the phone number that you asked for: ${contractQueryResult} \n`);
