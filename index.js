@@ -80,6 +80,19 @@ console.log(`- The bytecode file ID is: ${bytecodeFileId} \n`);
 	const contractExecuteRx = await contractExecuteSubmit.getReceipt(client);
 	console.log(`- Contract function call status: ${contractExecuteRx.status} \n`);
 
+
+	// Call contract function to update the state variable
+	const contractExecuteTxnew = new ContractExecuteTransaction()
+		.setContractId(contractId)
+		.setGas(100000)
+		.setFunction(
+			"setNumber",
+			new ContractFunctionParameters().addString("Sarah").addUint256(55555)
+		);
+	const contractExecuteSubmitnew = await contractExecuteTxnew.execute(client);
+	const contractExecuteRxnew = await contractExecuteSubmitnew.getReceipt(client);
+	console.log(`- Contract function call status: ${contractExecuteRxnew.status} \n`);
+
 	// Query the contract to check changes in state variable
 	const contractQueryTx1 = new ContractCallQuery()
 		.setContractId(contractId)
