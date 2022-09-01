@@ -42,7 +42,7 @@ async function main() {
 		.setTokenName("hbarRocks")
 		.setTokenSymbol("HROK")
 		.setDecimals(0)
-		.setInitialSupply(100000)
+		.setInitialSupply(100)
 		.setTreasuryAccountId(treasuryId)
 		.setAdminKey(treasuryKey)
 		.setSupplyKey(treasuryKey)
