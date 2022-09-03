@@ -4,16 +4,11 @@ const {
 	Client,
 	AccountId,
 	PrivateKey,
-	TokenCreateTransaction,
-	FileCreateTransaction,
-	FileAppendTransaction,
-	ContractCreateTransaction,
+	
 	ContractFunctionParameters,
-	TokenUpdateTransaction,
 	ContractExecuteTransaction,
 	TokenInfoQuery,
 	AccountBalanceQuery,
-	Hbar,
 } = require("@hashgraph/sdk");
 
 
@@ -64,20 +59,8 @@ async function main() {
 	console.log(`- New token supply: ${tokenInfo3.totalSupply.low} \n`);
 
 	//Execute a contract function (associate) ASSOCIATE
-	// const contractExecTx1 = await new ContractExecuteTransaction()
-	// 	.setContractId(contractId)
-	// 	.setGas(3000000)
-	// 	.setFunction(
-	// 		"tokenAssociate",
-	// 		new ContractFunctionParameters().addAddress(aliceId.toSolidityAddress())
-	// 	)
-	// 	.freezeWith(client);
-	// const contractExecSign1 = await contractExecTx1.sign(aliceyKey);
-	// const contractExecSubmit1 = await contractExecSign1.execute(client);
-	// const contractExecRx1 = await contractExecSubmit1.getReceipt(client);
-	// console.log(`- Token association with Alice's account: ${contractExecRx1.status.toString()} \n`);
+	// Associate to Alice's account already done. So must not add again.
 
-	//Execute a contract function (transfer)  TRANSFER
 	const contractExecTx2 = await new ContractExecuteTransaction()
 		.setContractId(contractId)
 		.setGas(3000000)

@@ -138,6 +138,8 @@ async function main() {
 	console.log(`- New token supply: ${tokenInfo3.totalSupply.low} \n`);
 
 	//Execute a contract function (associate) ASSOCIATE
+	// Hedera accounts must be associated with a fungible or non-fungible token first before you can transfer tokens to that account.
+	
 	const contractExecTx1 = await new ContractExecuteTransaction()
 		.setContractId(contractId)
 		.setGas(3000000)
