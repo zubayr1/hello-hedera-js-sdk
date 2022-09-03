@@ -20,7 +20,7 @@ const {
 async function main() {
 
     console.log("-------------------------------------Running Next Index-------------------------------------");
-    console.log('step 3 and step 4');
+    console.log('step 4');
 
     const operatorId = AccountId.fromString(process.env.OPERATOR_ID);
     const operatorKey = PrivateKey.fromString(process.env.OPERATOR_PVKEY);
@@ -32,11 +32,11 @@ async function main() {
     const client = Client.forTestnet().setOperator(operatorId, operatorKey);
 
     
-	const tokenId = '0.0.48142176';
+	const tokenId = '0.0.48153799';
 
     
 	
-	const contractId = '0.0.48141972';
+	const contractId = '0.0.48153801';
 	// const contractAddress = contractId.toSolidityAddress();
 	console.log(`- The smart contract ID is: ${contractId}`);
 	// console.log(`- The smart contract ID in Solidity format is: ${contractAddress} \n`);
@@ -44,20 +44,6 @@ async function main() {
 	// Token query 2.1
 	const tokenInfo2p1 = await tQueryFcn(tokenId);
 	console.log(`- Token supply key: ${tokenInfo2p1.supplyKey.toString()}`);
-
-	// // Update the fungible so the smart contract manages the supply
-	// const tokenUpdateTx = await new TokenUpdateTransaction()
-	// 	.setTokenId(tokenId)
-	// 	.setSupplyKey(contractId)
-	// 	.freezeWith(client)
-	// 	.sign(treasuryKey);
-	// const tokenUpdateSubmit = await tokenUpdateTx.execute(client);
-	// const tokenUpdateRx = await tokenUpdateSubmit.getReceipt(client);
-	// console.log(`- Token update status: ${tokenUpdateRx.status}`);
-
-	// // Token query 2.2
-	// const tokenInfo2p2 = await tQueryFcn(tokenId);
-	// console.log(`- Token supply key: ${tokenInfo2p2.supplyKey.toString()} \n`);
 
 
 
@@ -78,18 +64,18 @@ async function main() {
 	console.log(`- New token supply: ${tokenInfo3.totalSupply.low} \n`);
 
 	//Execute a contract function (associate) ASSOCIATE
-	const contractExecTx1 = await new ContractExecuteTransaction()
-		.setContractId(contractId)
-		.setGas(3000000)
-		.setFunction(
-			"tokenAssociate",
-			new ContractFunctionParameters().addAddress(aliceId.toSolidityAddress())
-		)
-		.freezeWith(client);
-	const contractExecSign1 = await contractExecTx1.sign(aliceyKey);
-	const contractExecSubmit1 = await contractExecSign1.execute(client);
-	const contractExecRx1 = await contractExecSubmit1.getReceipt(client);
-	console.log(`- Token association with Alice's account: ${contractExecRx1.status.toString()} \n`);
+	// const contractExecTx1 = await new ContractExecuteTransaction()
+	// 	.setContractId(contractId)
+	// 	.setGas(3000000)
+	// 	.setFunction(
+	// 		"tokenAssociate",
+	// 		new ContractFunctionParameters().addAddress(aliceId.toSolidityAddress())
+	// 	)
+	// 	.freezeWith(client);
+	// const contractExecSign1 = await contractExecTx1.sign(aliceyKey);
+	// const contractExecSubmit1 = await contractExecSign1.execute(client);
+	// const contractExecRx1 = await contractExecSubmit1.getReceipt(client);
+	// console.log(`- Token association with Alice's account: ${contractExecRx1.status.toString()} \n`);
 
 	//Execute a contract function (transfer)  TRANSFER
 	const contractExecTx2 = await new ContractExecuteTransaction()
